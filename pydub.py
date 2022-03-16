@@ -1,6 +1,6 @@
 from pyo import *
 import time
-s = Server().boot()
+s = Server(duplex=0).boot()
 s.start()
 
 C0 = 16.35
@@ -91,7 +91,7 @@ lfd = Sine([.4,.3], mul=.2, add=.5)
 lf2 = Sine(freq=.25, mul=10, add=30)
 
 for i in range(len(crazyFrog)):
-	time.sleep(crazyFrogTiming[i])
+	time.sleep(crazyFrogTiming[i]/2)
 	saw = SuperSaw(freq=crazyFrog[i],detune=lfd,bal=0.5,mul=0.2).out()
 
 time.sleep(1)

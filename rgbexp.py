@@ -10,10 +10,6 @@ height = 800
 pygame.display.set_caption("RGB Demo")
 screen = pygame.display.set_mode((width,height))
 
-player_img = pygame.image.load("player.png")
-player_rect = player_img.get_rect()
-player_location = [25,25]
-
 r = 0
 g = 0
 b = 0
