@@ -1,7 +1,12 @@
 from threading import Thread
-import rtmidi
 from synthesizer import Player, Synthesizer, Waveform
+from pydub import AudioSegment
+from pydub.playback import play
+import rtmidi
 import sys
+
+hi_hat = AudioSegment.from_wav("sounds/hi_hat.wav")
+kick = AudioSegment.from_wav("sounds/kick.wav")
 
 midiin = rtmidi.RtMidiIn()
 
@@ -37,8 +42,11 @@ class ControllerInput:
 						volume_1 = m.getControllerValue() / 128
 				elif m.isNoteOn():
 					print(m.getMidiNoteName(m.getNoteNumber()))
-					note = m.getMidiNoteName(m.getNoteNumber())
-					volume_toggle = True
+					if (m.getMidiNoteName(m.getNoteNumber()) == "C2"):
+						play(hi_hat)
+					else:
+						note = m.getMidiNoteName(m.getNoteNumber())
+						volume_toggle = True
 				elif m.isNoteOff() and note == m.getMidiNoteName(m.getNoteNumber()):
 					volume_toggle = False
 	
