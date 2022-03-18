@@ -1,0 +1,44 @@
+TITLE PAGE
+
+Orbitron Mk1
+
+TABLE OF CONTENTS
+
+INTRO
+
+The Orbitron Music Maker is a small device which utilises a MIDI controller and speaker in order to let the user create music on the go.
+
+HOW IT IS BUILT - SOFTWARE
+
+The Orbitron is written in Python and utilises multiple external libraries, such as PyRtmidi, a Python version of the Rtmidi C library for MIDI input; Pydub, an audio processing library primarily used for the drum sounds; Synthesizer, a synthesis library.
+
+The 
+
+HOW IT IS BUILT - HARDWARE
+
+The Orbitron MK1 currently relies on the presence of an external MIDI controller and USB speaker in order to be used, and runs on a Raspberry Pi Model B+ running Raspbian.
+
+USE CASE - WHO WILL USE IT?
+
+MIDI controllers rely on the use of complex digital audio workspaces (DAWs), which can be daunting for newcomers or young people. This product allows people to convert a previously purchased MIDI controller into a useable instrument. This makes it easy to use for children, and can be used for recreation.
+
+The device is largely intended for recreational use, but may be used for bedroom pop style music creation. 
+
+CURRENT STATE 
+
+The Orbitron MK1 currently has full input with a MIDI controller using PyRtmidi, as tested on an AKAI MPK Mini keyboard. Key input from the MIDI controller accurately translates to the frequency needed for the synthesiser to play the correct note, and operates correctly. The synthesiser currently depends on the Synthesizer Python library, which 
+
+POTENTIAL DEVELOPMENT IN THE FUTURE
+
+Current plans for a potential Orbitron MK2 include:
+	- Recording of custom drum loops, synthesiser melodies and overall songs
+	- Custom input; no need for external MIDI controller
+	- Better synthesiser processing, more customisability, less reliance on the Synthesizer library
+	- Potential bluetooth compatibility
+	- Potential move to C++ or other similar language for increased capability with synthesiser creation
+
+HOW IT LINKS TO SOME INDUSTRIAL PROJECTS / USES
+
+
+
+CONCLUSION 
