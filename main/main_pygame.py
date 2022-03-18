@@ -1,23 +1,35 @@
+# deprecated; pydub's _play_with_simpleaudio works better than pygame's channel feature
+
 from threading import Thread
 from synthesizer import Player, Synthesizer, Waveform
-from pydub import AudioSegment
-from pydub.playback import play
+from pygame import mixer as mixer
 import rtmidi
 import sys
 import time
+
+mixer.init(44100,-16,2,1024)
 
 bpm = 100 # beat per minute
 bps = bpm / 60 # beat per second
 spb = 1 / bps # seconds per beat
 
-hi_hat = AudioSegment.from_wav("sounds/hi_hat.wav")
-kick = AudioSegment.from_wav("sounds/kick.wav")
+hi_hat = mixer.Sound("sounds/hi_hat.wav")
+kick = mixer.Sound("sounds/kick.wav")
+
+kick_channel1 = mixer.find_channel()
+kick_channel1.set_volume(0.5,1.0)
+
+kick_channel2 = mixer.find_channel()
+kick_channel2.set_volume(0.5,1.0)
+
+hi_hat_channel1 = mixer.find_channel()
+hi_hat_channel1.set_volume(0.5,1.0)
 
 kick_toggle = False
 drum_loop0 = False
 
-kick_duration = kick.duration_seconds
-hi_hat_duration = hi_hat.duration_seconds
+kick_duration = kick.get_length()
+hi_hat_duration = hi_hat.get_length()
 
 kick_per_beat = spb - kick_duration
 hi_hat_per_beat = spb - hi_hat_duration
@@ -68,7 +80,7 @@ class ControllerInput:
 				if m.isNoteOn():
 					print(m.getMidiNoteName(m.getNoteNumber()))
 					if (m.getMidiNoteName(m.getNoteNumber()) == "C2"):
-						play(hi_hat)
+						mixer.Sound.play(hi_hat)
 					elif (m.getMidiNoteName(m.getNoteNumber()) == "C#2"):
 						drum_loop0 = True
 					else:
@@ -92,14 +104,12 @@ class DrumMachine:
 		while True:
 			if drum_loop0 == True:
 				print("drum loop 0")
-				play(kick)
-				time.sleep(kick_per_beat) #remainder of time after sound
-				time.sleep(spb)
-				play(hi_hat)
-				time.sleep(hi_hat_per_beat)
-				time.sleep(spb)
+				kick_channel1.play(kick)
+				time.sleep(0.33)
+				kick_channel2.play(kick)
+				time.sleep(0.33)
 			if kick_toggle == True:
-				play(kick)
+				kick_channel1.play(kick)
 				kick_toggle = False
 			
 DrumMachineThread = Thread(target=DrumMachine().run)
