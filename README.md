@@ -1,2 +1,4 @@
 # Pynth
-University project - programme for Raspberry Pi to take MIDI controller input and output synthesiser + drum sounds.
+Rudimentary Python synthesiser using NumPy, also features hi-hat and kick drum sound effects via Pydub.
+
+Requires MIDI controller.
